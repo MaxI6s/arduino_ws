@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "programmer": "avrispmkii",
+    "sketch": "01_Arduino_motor_encoder_pos/01_Arduino_motor_encoder_pos.ino"
+}
