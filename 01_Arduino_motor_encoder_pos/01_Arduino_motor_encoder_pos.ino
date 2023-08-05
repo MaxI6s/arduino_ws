@@ -2,6 +2,7 @@
 
 // Define math constant for calculus
 // (not sure if it's included in arduino.h)
+
 #define PI 3.1415926535897932384626433832795
 #define HALF_PI 1.5707963267948966192313216916398
 #define TWO_PI 6.283185307179586476925286766559
@@ -43,7 +44,7 @@ void setup() {
   
   Serial.begin(serialBaudRate);
 
-  Serial.println("------ Initialisation ------");
+  Serial.println("- Initialisation -----------------");
   Serial.print("Baud rate : ");
   Serial.println(serialBaudRate);
   delay(50);
@@ -52,7 +53,7 @@ void setup() {
   pinMode(encoderBPin, INPUT);
   delay(50);
   
-  Serial.println("------ Pin setup ------");
+  Serial.println("- Pin setup ----------------------");
   Serial.println("Encoder pins must allow interrupt (for arduino UNO : 2, 3)");
   Serial.print("Encoder channel A: ");
   Serial.println(encoderAPin);
@@ -67,12 +68,12 @@ void setup() {
   initEncoder();
   delay(50);
   
-  Serial.println("------ Encoder initialization ------");
+  Serial.println("- Encoder initialization ---------");
   Serial.print("Encoder in position: ");
   Serial.println(lastEncoded, BIN);
   delay(50);
   
-  Serial.println("------ START ------");
+  Serial.println("- START --------------------------");
 }
 
 void loop() {
