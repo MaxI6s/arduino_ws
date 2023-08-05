@@ -14,7 +14,7 @@ const int encoderResolution = 120;
 // -- TO DO -- 
 
 // Serial communication baud rate
-const int serialBaudRate = 9600;
+const long serialBaudRate = 115200;
 
 // PID parameters
 
@@ -37,23 +37,32 @@ void setup() {
   Serial.println("------ Initialisation ------");
   Serial.print("Baud rate : ");
   Serial.println(serialBaudRate);
+  delay(50);
 
-  Serial.println("------ Pin setup ------");
-  Serial.println("Encoder pins must allow interrupt (for arduino UNO : 2, 3)");
   pinMode(encoderAPin, INPUT);
   pinMode(encoderBPin, INPUT);
-  Serial.println("Encoder channel A: " + encoderAPin);
-  Serial.println("Encoder channel B: " + encoderBPin);
+  delay(50);
+  
+  Serial.println("------ Pin setup ------");
+  Serial.println("Encoder pins must allow interrupt (for arduino UNO : 2, 3)");
+  Serial.print("Encoder channel A: ");
+  Serial.println(encoderAPin);
+  Serial.print("Encoder channel B: ");
+  Serial.println(encoderBPin);
 
   // Attach interrupts for encoder channels
   attachInterrupt(digitalPinToInterrupt(encoderAPin), updateEncoder, CHANGE);
   attachInterrupt(digitalPinToInterrupt(encoderBPin), updateEncoder, CHANGE);
+  delay(50);
 
-  Serial.println("------ Encoder initialization ------");
   initEncoder();
+  delay(50);
+  
+  Serial.println("------ Encoder initialization ------");
   Serial.print("Encoder in position: ");
   Serial.println(lastEncoded, BIN);
-
+  delay(50);
+  
   Serial.println("------ START ------");
 }
 
@@ -69,16 +78,19 @@ void updateEncoder(){
   int encoded = (MSB << 1) | LSB;
   int sum = (lastEncoded << 2) | encoded;
 
+/*
   Serial.print(MSB);
   Serial.print(", ");
   Serial.println(LSB);
+*/
 
   if (sum == 0b0001 || sum == 0b0111 || sum == 0b1110 || sum == 0b1000) {
     encoderCount ++;
   } else if (sum == 0b0010 || sum == 0b1011 || sum == 0b1101 || sum == 0b0100) {
     encoderCount --;
   }
-
+  
+  Serial.println(encoderCount);
   lastEncoded = encoded;
 }
 
