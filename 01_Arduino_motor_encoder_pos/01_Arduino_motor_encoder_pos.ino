@@ -37,7 +37,7 @@ const long serialBaudRate = 115200;
 // Variables 
 
 volatile long encoderCount = 0; 
-volatile long lastEncoded = 0;
+volatile int lastEncoded = 0;
 volatile float measuredAngle = 0.0;
 
 void setup() {
