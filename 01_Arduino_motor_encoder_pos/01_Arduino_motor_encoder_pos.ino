@@ -27,15 +27,13 @@ const int countPerRevolution = phase * encoderResolution;
 const long serialBaudRate = 115200;
 
 // PID parameters
-
-// -- TO DO -- 
+double setpoint, input, output;
+double kp = 1, ki = 0.05, kd = 0.25;
 
 // Initialize PID controller
+PID controler_PID(&input, &output, &setpoint, kp, ki, kd, DIRECT);
 
-// -- TO DO -- 
-
-// Variables 
-
+// Variables
 volatile long encoderCount = 0; 
 volatile int lastEncoded = 0;
 volatile float measuredAngle = 0.0;
@@ -72,6 +70,11 @@ void setup() {
   Serial.print("Encoder in position: ");
   Serial.println(lastEncoded, BIN);
   delay(50);
+
+  //turn the PID on
+  Serial.println("- turn ON PID --------------------");
+  myPID.SetMode(AUTOMATIC);
+  Serial.println("PID turned on");
   
   Serial.println("- START --------------------------");
 }
